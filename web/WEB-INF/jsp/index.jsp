@@ -4,6 +4,6 @@
     <title>Index</title>
 </head>
 <body>
-  index
+    <h1>Main Page</h1>
 </body>
 </html>

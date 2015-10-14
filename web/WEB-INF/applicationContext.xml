@@ -52,5 +52,6 @@
        </bean>
 
        <mvc:annotation-driven />
+       <!--<mvc:default-servlet-handler />-->
 
 </beans>
