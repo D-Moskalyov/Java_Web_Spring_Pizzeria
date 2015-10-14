@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - pizzeriadb@localhost" uuid="2d1b8d81-1df7-457c-96eb-454c5dc89a8e">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>pizzeriadb.*</schema-pattern>
+      <default-schemas>pizzeriadb.*</default-schemas>
+    </data-source>
+  </component>
+</project>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - pizzeriadb@localhost" uuid="2d1b8d81-1df7-457c-96eb-454c5dc89a8e">
+    <database-info product="MySQL" version="5.7.7-rc-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="pizzeriadb"/>
+    <table name="categories" schema="" catalog="pizzeriadb" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="idGood_idCat" table="goods" schema="" catalog="pizzeriadb" columns="CategorieID"/>
+    </table>
+    <table name="goods" schema="" catalog="pizzeriadb" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="CategorieID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="idGood_idCat" columns="CategorieID" ref-table="categories" ref-schema="" ref-catalog="pizzeriadb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="GoodID" table="order_details" schema="" catalog="pizzeriadb" columns="GoodID"/>
+      <index name="id_idx" unique="false" columns="CategorieID"/>
+    </table>
+    <table name="order_details" schema="" catalog="pizzeriadb" type="TABLE">
+      <column name="idOrder_Details" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="OrderID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="GoodID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Date" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="idOrder_Details"/>
+      <foreign-key name="GoodID" columns="GoodID" ref-table="goods" ref-schema="" ref-catalog="pizzeriadb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="OrdID" columns="OrderID" ref-table="orders" ref-schema="" ref-catalog="pizzeriadb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="GoodID_idx" unique="false" columns="GoodID"/>
+      <index name="OrdID_idx" unique="false" columns="OrderID"/>
+    </table>
+    <table name="orders" schema="" catalog="pizzeriadb" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="UserID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Compleated" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="OrderID_UserID" columns="UserID" ref-table="users" ref-schema="" ref-catalog="pizzeriadb" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="OrdID" table="order_details" schema="" catalog="pizzeriadb" columns="OrderID"/>
+      <index name="OrderID_UserID_idx" unique="false" columns="UserID"/>
+    </table>
+    <table name="users" schema="" catalog="pizzeriadb" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Email" sqlType="VARCHAR" precision="45" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Password" sqlType="CHAR" precision="32" scale="0" nullable="true" jdbcType="1"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="OrderID_UserID" table="orders" schema="" catalog="pizzeriadb" columns="UserID"/>
+    </table>
+  </data-source>
+</component>
