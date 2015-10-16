@@ -34,8 +34,10 @@ public class GoodDAO implements GoodService {
     }
 
     public List<Good> getList(Integer id) {
-        Query q = sf.getCurrentSession().createQuery("from Good g where g.category.id = :catId");
-        q.setInteger("catId", id);
+//        Query q = sf.getCurrentSession().createQuery("from Good g where g.category.id = :catId");
+//        q.setInteger("catId", id);
+        Query q = sf.getCurrentSession().createQuery("from Good");
+        //q.setInteger("catId", id);
         return q.list();
     }
 }

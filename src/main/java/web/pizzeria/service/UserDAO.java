@@ -1,6 +1,7 @@
 package web.pizzeria.service;
 
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,7 +35,22 @@ public class UserDAO implements UserService, UserDetailsService {
         return (Integer) sf.getCurrentSession().save(u);
     }
 
+    //@Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        User user = null;
+
+        try {
+            Query q = sf.getCurrentSession().createQuery("from User u where u.email = :email");
+            q.setString("email", s);
+            List<User> users = q.list();
+            if (users.isEmpty()) {
+                throw new UsernameNotFoundException("User " + s + " not found");
+            } else {
+                return users.get(0);
+            }
+        } catch (Exception e) {
+            System.err.println("ohshit");
+        }
         return null;
     }
 }
