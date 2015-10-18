@@ -15,12 +15,13 @@ public class Good {
     //Float price;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @MapKeyColumn(name = "CategorieID")
+//    @MapKeyColumn(name = "CategorieID")
+    @JoinColumn(name ="CategorieID")
     Category category;
 
-//    public Category getCategory() {
-//        return category;
-//    }
+    public Category getCategory() {
+        return category;
+    }
     public Integer getId() {
         return id;
     }

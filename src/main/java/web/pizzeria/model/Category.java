@@ -17,6 +17,10 @@ public class Category {
         return id;
     }
 
+    public List<Good> getGoods() {
+        return goods;
+    }
+
     @OneToMany(mappedBy = "category")
     List<Good> goods;
 
