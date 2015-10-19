@@ -7,12 +7,16 @@
           <div class="row">
               <div class="text-center center-block" style="width: 300px">
                   <div >
-                      <form action="<c:url value="/j_spring_security_check" />" method="post">
+                      <form action="<c:url value="/static/j_spring_security_check" />" method="post">
                           <div class="form-group">
-                              <label for="j_username">Email: </label><input class="form-control" type="text" name="j_username" />
+                              <label for="j_username">Email: </label><input class="form-control" type="text" id="j_username" name="j_username" />
                           </div>
                           <div class="form-group">
-                              <label for="j_password">Password: </label><input class="form-control" type="password" name="j_password" />
+                              <label for="j_password">Password: </label><input class="form-control" type="password" id="j_password" name="j_password" />
+                          </div>
+                          <div>
+                              <input id="remember_me" name="_spring_security_remember_me" type="checkbox"/>
+                              <label for="remember_me" class="inline">Remember me</label></td>
                           </div>
                           <input class="btn btn-success" type="submit" />
                       </form>

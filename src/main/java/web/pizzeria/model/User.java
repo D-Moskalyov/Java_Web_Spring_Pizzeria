@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name="users")
@@ -43,6 +44,40 @@ public class User implements Serializable, UserDetails {
         return list;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.email);
+        hash = 79 * hash + Objects.hashCode(this.password);
+        hash = 79 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
     //@Override
     public String getPassword() {
         return password;
@@ -54,21 +89,21 @@ public class User implements Serializable, UserDetails {
 
     //@Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     //@Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     //@Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     //@Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
