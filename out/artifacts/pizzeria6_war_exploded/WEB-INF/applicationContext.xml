@@ -21,6 +21,7 @@
        <context:component-scan base-package="web.pizzeria.model"/>
        <context:component-scan base-package="web.pizzeria.controller"/>
 
+       <bean id="basket" class="web.pizzeria.model.Basket"  />
 
        <security:http auto-config='true'>
               <security:intercept-url pattern="/" access="ROLE_ANONYMOUS" />
@@ -34,7 +35,7 @@
               <!--<security:form-login login-page="/user/login"-->
                                    <!--default-target-url="/shop"-->
                                    <!--authentication-failure-url="/login?error=true" />-->
-              <security:logout logout-url="/user/logout" logout-success-url="/shop" />
+              <security:logout logout-url="/user/logout" logout-success-url="/" />
 
               <!--<security:anonymous username="guest" granted-authority="hasRole('ROLE_ANONYMOUS')" />-->
               <security:remember-me />

@@ -41,4 +41,16 @@ public class UserController {
 
         return "login";
     }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+     public String registration() {
+        //exit
+        return "registration";
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String registration(ModelMap model) {
+        //check
+        return "redirect:/shop";
+    }
 }

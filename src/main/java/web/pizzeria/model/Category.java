@@ -10,7 +10,10 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     Integer id;
+
+    @Column(name = "Name")
     String name;
 
     public Integer getId() {

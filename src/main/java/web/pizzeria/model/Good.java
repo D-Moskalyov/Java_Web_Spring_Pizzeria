@@ -9,7 +9,11 @@ public class Good {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "id")
     Integer id;
+
+    @Column(name = "Name")
     String name;
     //String description;
     //Float price;

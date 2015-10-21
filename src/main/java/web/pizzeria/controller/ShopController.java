@@ -8,10 +8,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import web.pizzeria.model.Basket;
+import web.pizzeria.model.BasketItem;
 import web.pizzeria.model.Category;
 import web.pizzeria.model.Good;
 import web.pizzeria.service.GoodService;
 
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -20,6 +23,8 @@ import java.util.List;
 public class ShopController {
     @Autowired
     GoodService srv;
+    @Autowired
+    Basket basket;
 
     public ShopController(GoodService srv) {
         this.srv = srv;
@@ -48,5 +53,33 @@ public class ShopController {
         model.addAttribute("title", cat.getName());
 
         return "goodlist";
+    }
+
+    @RequestMapping(value = "/add/{catId}/{id}", method = RequestMethod.GET)
+    public String addToBasket(
+            @PathVariable(value = "catId")
+            Integer catId,
+            @PathVariable(value = "id")
+            Integer id,
+            ModelMap model) {
+
+        //Basket basket = (Basket) model.get("basket");
+        if (basket == null) basket = new Basket();
+
+
+        BasketItem i = basket.get(id);
+        if (i == null) {
+            i = new BasketItem();
+            i.setGood(srv.find(id));
+        } else {
+            i.incCount();
+        }
+
+        if (i.getGood() != null)
+            basket.put(id, i);
+        //Collection<BasketItem> col = basket.values();
+        model.addAttribute("basket", basket);
+
+        return "redirect:/shop/category/" + catId.toString();
     }
 }

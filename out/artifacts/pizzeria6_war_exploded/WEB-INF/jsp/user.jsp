@@ -5,7 +5,7 @@
   <tiles:putAttribute name="body">
     <html>
       <head>
-          <title></title>
+          <title>${title}</title>
       </head>
       <body>
         <div class="container">

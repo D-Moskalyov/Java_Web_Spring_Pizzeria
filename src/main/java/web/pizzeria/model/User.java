@@ -23,14 +23,24 @@ public class User implements Serializable, UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
+    @Column(name = "Name")
     private String name;
+
+    @Column(name = "Email")
     private String email;
+
+    @Column(name = "Password")
     private String password;
 
     public String getName() {
         return name;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setName(String name) {

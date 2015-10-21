@@ -35,9 +35,9 @@
                     </div>
                     <div class="panel-body">
                       <ul>
-                          <%--<c:forEach items="${basket}" var="item">--%>
-                          <%--<li>${item.value.good.name} : <span>${item.value.count}</span></li>--%>
-                          <%--</c:forEach>--%>
+                          <c:forEach items="${basket}" var="item">
+                            <li>${item.value.good.name} : <span>${item.value.count}</span></li>
+                          </c:forEach>
                       </ul>
                     </div>
                   </div>

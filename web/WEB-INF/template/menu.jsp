@@ -7,6 +7,7 @@
       <li><a href="<c:url value="/shop" />">Browse categories</a></li>
       <li><a href="<c:url value="/user/show" />">Profile</a></li>
       <li><a href="<c:url value="/user/logout" />">Logout</a></li>
+      <li><a href="<c:url value="/user/registration" />">Registration</a></li>
     </ul>
   </div>
 </nav>

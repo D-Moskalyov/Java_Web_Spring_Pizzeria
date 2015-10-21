@@ -1,1 +1,1 @@
-<div>&copy; https://github.com/D-Moskalyov</div>
+<div align="right">&copy; https://github.com/D-Moskalyov</div>
