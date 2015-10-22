@@ -77,8 +77,10 @@ public class ShopController {
 
         if (i.getGood() != null)
             basket.put(id, i);
-        //Collection<BasketItem> col = basket.values();
-        model.addAttribute("basket", basket);
+        Collection<BasketItem> col = basket.values();
+        //Basket bask = new Basket();
+        //bask = basket;
+        model.addAttribute("basket", col);
 
         return "redirect:/shop/category/" + catId.toString();
     }

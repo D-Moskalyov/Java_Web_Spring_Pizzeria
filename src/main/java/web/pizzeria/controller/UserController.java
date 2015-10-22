@@ -6,12 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import web.pizzeria.model.User;
 import web.pizzeria.service.UserService;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -43,13 +42,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-     public String registration() {
+     public String registration(Map<String, Object> model) {
         //exit
+        User userForm = new User();
+        String passYet = new String();
+        model.put("userForm", userForm);
+        //model.put("passYet", passYet);
         return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(ModelMap model) {
+    public String registration(@ModelAttribute("userForm") User user,
+                               //@ModelAttribute("passYet") String passYet,
+                               Map<String, Object> model) {
         //check
         return "redirect:/shop";
     }
