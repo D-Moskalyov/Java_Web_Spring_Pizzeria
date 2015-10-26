@@ -31,6 +31,34 @@ public class UserDAO implements UserService, UserDetailsService {
         return sf.getCurrentSession().createQuery("from User").list();
     }
 
+    @Transactional
+    //@Override
+    public User registerNewUserAccount(UserDTO accountDto) throws EmailExistsException {
+        if (emailExist(accountDto.getEmail())) {
+            throw new EmailExistsException();
+        }
+        else {
+            User user = new User();
+
+            user.setName(accountDto.getName());
+            user.setPassword(accountDto.getPassword());
+            user.setEmail(accountDto.getEmail());
+
+            save(user);
+            return user;
+        }
+    }
+
+    private boolean emailExist(String email) {
+        Query q = sf.getCurrentSession().createQuery("from User where email = :email");
+        q.setString("email", email);
+        List<User> users = q.list();
+        if (users != null & users.size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
     public int save(User u) {
         return (Integer) sf.getCurrentSession().save(u);
     }

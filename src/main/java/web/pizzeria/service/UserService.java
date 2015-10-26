@@ -9,6 +9,7 @@ import java.util.List;
 public interface UserService {
     User find(Integer id);
     List<User> findAll() throws SQLException;
+    User registerNewUserAccount(UserDTO userDTO) throws EmailExistsException;
 //    User findFlowUser() throws SQLException, CustomerNotIdentityException;
 //    User findUser(User us) throws SQLException, CustomerNotFoundException;
 //    User attemptAddCustomer(User us) throws SQLException, CustomerAlreadyExist;

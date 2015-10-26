@@ -32,6 +32,10 @@ public class User implements Serializable, UserDetails {
     @Column(name = "Email")
     private String email;
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Column(name = "Password")
     private String password;
 
@@ -45,6 +49,10 @@ public class User implements Serializable, UserDetails {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     //@Override
