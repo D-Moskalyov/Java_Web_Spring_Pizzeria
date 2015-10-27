@@ -1,6 +1,7 @@
 package web.pizzeria.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import web.pizzeria.model.Good;
 import web.pizzeria.model.User;
 import web.pizzeria.service.EmailExistsException;
 import web.pizzeria.service.UserDTO;
@@ -22,6 +24,7 @@ import java.util.Map;
 @RequestMapping("/user")
 @Transactional
 @SessionAttributes("current")
+//@SpringBootApplication
 public class UserController {
 
     @Autowired
@@ -48,7 +51,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(WebRequest webRequest, Model model) {
+    public String registration(Model model) {
         //exit
         //User userForm = new User();
         //String passYet = new String("sad");
@@ -63,8 +66,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userDTO") @Valid UserDTO userDTO,
-                               BindingResult result, WebRequest request, Errors errors) {
+    public String registration(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
+                                BindingResult result) {
         User registered = null;
         if (!result.hasErrors()) {
             registered = createUserAccount(userDTO, result);
@@ -82,6 +85,22 @@ public class UserController {
         }
         //return "redirect:/shop";
     }
+
+//    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+//    public String registration(UserDTO userDTO) {
+////        UserDTO userDTO = new UserDTO();
+////        model.addAttribute("userDTO", userDTO);
+////        //model.put("userDTO", userDTO);
+//        return "registration";
+//    }
+//
+//    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+//    public String registration(@Valid UserDTO userDTO, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return "registration";
+//        }
+//        return "redirect:/shop";
+//    }
 
     private User createUserAccount(UserDTO userDTO, BindingResult result) {
         User registered = null;
