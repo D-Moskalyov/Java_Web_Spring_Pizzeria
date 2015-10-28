@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=windows-1251" language="java" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false"%>
@@ -12,23 +12,26 @@
             <form action="<c:url value="/user/registration" />" modelAttribute="userDTO" method="post">
               <div class="form-group">
                 <label for="username">Name: </label>
-                <input class="form-control" type="text" id="username" path="name" name="name" />
+                <input class="form-control" type="text" id="username" path="name" name="name" value="${userDTO.name}" />
                 <errors path="name" element="div"/>
+                <%--<td th:if="${fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>--%>
               </div>
               <div class="form-group">
                 <label for="e-mail">Email: </label>
-                <input class="form-control" type="text" id="e-mail" path="email" name="email" />
+                <input class="form-control" type="text" id="e-mail" path="email" name="email" value="${userDTO.email}" />
                 <errors path="email" element="div"/>
+                <%--<td th:if="${fields.hasErrors('email')}" th:errors="*{email}">Name Error</td>--%>
               </div>
               <div class="form-group">
                 <label for="password">Password: </label>
-                <input class="form-control" type="password" id="password" path="password" name="password" />
+                <input class="form-control" type="password" id="password" path="password" name="password" value="${userDTO.password}"/>
                 <errors path="password" element="div"/>
+                <%--<td th:if="${fields.hasErrors('password')}" th:errors="*{password}">Name Error</td>--%>
               </div>
               <div class="form-group">
                 <label for="passwordYet">Password yet: </label>
                 <%--<input class="form-control" type="password" id="passwordYet" path="passYet" name="passYet"/>--%>
-                <input class="form-control" type="password" id="passwordYet" path="matchingPassword" name="matchingPassword" />
+                <input class="form-control" type="password" id="passwordYet" path="matchingPassword" name="matchingPassword" value="${userDTO.matchingPassword}"/>
                 <errors element="div"/>
               </div>
               <input class="btn btn-success" type="submit" />

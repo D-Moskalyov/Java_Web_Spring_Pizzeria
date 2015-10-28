@@ -5,6 +5,9 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +21,10 @@ import java.util.List;
 @Repository(value = "userDAO")
 @Transactional
 public class UserDAO implements UserService, UserDetailsService {
+
+    @Autowired
+    @Qualifier(value = "authMgr")
+    AuthenticationManager authMgr;
 
     @Autowired
     @Qualifier(value = "sessionFactory")
@@ -45,6 +52,24 @@ public class UserDAO implements UserService, UserDetailsService {
             user.setEmail(accountDto.getEmail());
 
             save(user);
+
+            try {
+//                UserDetails userDetails = loadUserByUsername(user.getName());
+//                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails,
+//                        user.getPassword(), userDetails.getAuthorities());
+
+                //UserDetails userDetails = loadUserByUsername(user.getName());
+                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user,
+                        user.getPassword(), user.getAuthorities());
+                authMgr.authenticate(auth);
+                // redirect into secured main page if authentication successful
+                if(auth.isAuthenticated()) {
+                    SecurityContextHolder.getContext().setAuthentication(auth);
+                    //return "redirect:/";
+                }
+            } catch (Exception e) {
+                //logger.debug("Problem authenticating user" + username, e);
+            }
             return user;
         }
     }

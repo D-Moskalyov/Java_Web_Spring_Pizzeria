@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 import web.pizzeria.model.Good;
 import web.pizzeria.model.User;
 import web.pizzeria.service.EmailExistsException;
@@ -67,21 +68,21 @@ public class UserController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@Valid @ModelAttribute("userDTO") UserDTO userDTO,
-                                BindingResult result) {
+                                BindingResult result, Errors errors) {
         User registered = null;
         if (!result.hasErrors()) {
             registered = createUserAccount(userDTO, result);
-        }
-        if (registered == null) {
-            result.rejectValue("email", "message.regError");
+            if (registered == null) {
+                result.rejectValue("email", "message.regError");
+            }
         }
         if (result.hasErrors()) {
             return "registration";
-            //return new ModelAndView("registration", "user", userDTO);
+            //return new ModelAndView("registration", "userDTO", userDTO);
         }
         else {
             return "redirect:/shop";
-            //return new ModelAndView("successRegister", "user", accountDto);
+            //return new ModelAndView("login");
         }
         //return "redirect:/shop";
     }
